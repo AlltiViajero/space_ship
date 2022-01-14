@@ -1,9 +1,13 @@
+import { Missile } from "./Missile.js";
+
 export class Spaceship{
+    missiles = []           //tablica z nabojami
     #modifier = 5;          //zmienna przechowująca o ile ma się przesówać px statek
     #leftArrow = false;     //zmienna sprawdzająca czy jest wciśnięta lewa strzałka
     #rightAttow = false;    //zmienna sprawdzająca czy jest wciśnięta prawa strzałka
-    constructor(element){   //konstruktor który przekazuje element z uchytem do html w Game
+    constructor(element, contener){   //konstruktor który przekazuje element z uchytem do html w Game
         this.element = element;
+        this.contener = contener;
     }
     init(){
         this.#setPosition();
@@ -23,7 +27,6 @@ export class Spaceship{
     #eventListeners(){
         window.addEventListener('keydown', ({ keyCode }) => {
             switch(keyCode){
-
                 case 37:
                     this.#leftArrow = true;
                 break;
@@ -34,6 +37,9 @@ export class Spaceship{
         });
         window.addEventListener('keyup', ({ keyCode }) => {
             switch(keyCode){
+                case 32:
+                    this.#shot();
+                break;
                 case 37:
                     this.#leftArrow = false;
                 break;
@@ -57,4 +63,10 @@ export class Spaceship{
             this.element.style.left = `${parseInt(this.element.style.left, 10) + this.#modifier}px`;
         }
     };
+//metoda strzelania
+    #shot(){
+        const missile = new Missile(this.#getPosition(), this.element.offsetTop, this.contener);
+        missile.init();
+        this.missiles.push(missile);
+    }
 };

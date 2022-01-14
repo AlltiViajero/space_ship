@@ -103,6 +103,7 @@ body{
     background-size: cover;
     width: 12px;
     height: 24px;
+    position: absolute;
 }
 @keyframes move-8-units-X {
     from{
