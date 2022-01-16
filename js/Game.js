@@ -1,4 +1,5 @@
 import { Spaceship } from "./Spaceship.js";
+import { Enemy } from "./Enemy.js";
 class Game{
     #HTML_ELEMENTS = {
         spaceship: document.querySelector('[data-spaceship]'),
@@ -6,14 +7,43 @@ class Game{
     }
     #ship = new Spaceship(this.#HTML_ELEMENTS.spaceship, this.#HTML_ELEMENTS.contener);
     #checkPositionInterval = null;
+    #createEnemyInterval = null;
+    #enemies = [];
+    #enemiesInterval = null;
     init(){
         this.#ship.init();
         this.#newGame();
     }
     #newGame(){
+        this.#enemiesInterval = 30;
+        this.#createEnemyInterval = setInterval(() => this.#randomNewEnemy(), 1000);
         this.#checkPositionInterval = setInterval(() => this.#checkPosition(), 1);
     };
+    #randomNewEnemy(){
+      const randomNumber = Math.floor(Math.random() * 5) +1;
+      randomNumber % 5 ? 
+        this.#createNewEnemy(this.#HTML_ELEMENTS.contener, this.#enemiesInterval, 'enemy') : 
+        this.#createNewEnemy(this.#HTML_ELEMENTS.contener, this.#enemiesInterval * 2, 'enemy--big', 3)
+    }
+
+    #createNewEnemy(...params){
+        const enemy = new Enemy(...params);
+        enemy.init();
+        this.#enemies.push(enemy);
+    }
     #checkPosition(){
+        this.#enemies.forEach((enemy, enemyIndex, enemiesArray) => {
+            const enemyPosition = {
+                top: enemy.element.offsetTop,
+                right: enemy.element.Left + enemy.element.offsetWidth,
+                bottom: enemy.element.offsetTop + enemy.element.offsetHeight,
+                left: enemy.element.offsetLeft,
+            }
+            if (enemyPosition.top > window.innerHeight) {
+                enemy.remove();
+                enemiesArray.splice(enemyIndex, 1)
+            };
+        });
         this.#ship.missiles.forEach((missile, missileIndex, missileArray) => {
             const missilePosition = {
                 top: missile.element.offsetTop,
