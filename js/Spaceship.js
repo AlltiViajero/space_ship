@@ -2,7 +2,7 @@ import { Missile } from "./Missile.js";
 
 export class Spaceship{
     missiles = []           //tablica z nabojami
-    #modifier = 5;          //zmienna przechowująca o ile ma się przesówać px statek
+    #modifier = 10;          //zmienna przechowująca o ile ma się przesówać px statek
     #leftArrow = false;     //zmienna sprawdzająca czy jest wciśnięta lewa strzałka
     #rightAttow = false;    //zmienna sprawdzająca czy jest wciśnięta prawa strzałka
     constructor(element, contener){   //konstruktor który przekazuje element z uchytem do html w Game
@@ -56,10 +56,10 @@ export class Spaceship{
     };
 //metoda co ma się zadziać przy naciśnięciu której strzałki
     #whatKey(){
-        if (this.#leftArrow && this.#getPosition() > 0){
+        if (this.#leftArrow && this.#getPosition() > 12){
             this.element.style.left = `${parseInt(this.element.style.left, 10) - this.#modifier}px`;
         }
-        if (this.#rightAttow && this.#getPosition() < window.innerWidth){
+        if (this.#rightAttow && this.#getPosition() + 12 < window.innerWidth){
             this.element.style.left = `${parseInt(this.element.style.left, 10) + this.#modifier}px`;
         }
     };
