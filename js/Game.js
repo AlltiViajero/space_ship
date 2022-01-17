@@ -3,19 +3,25 @@ import { Enemy } from "./Enemy.js";
 class Game{
     #HTML_ELEMENTS = {
         spaceship: document.querySelector('[data-spaceship]'),
-        contener: document.querySelector('[data-contener]')
+        contener: document.querySelector('[data-contener]'),
+        lives: document.querySelector('[data-lives]'),
+        score: document.querySelector('[data-score]'),
     }
     #ship = new Spaceship(this.#HTML_ELEMENTS.spaceship, this.#HTML_ELEMENTS.contener);
     #checkPositionInterval = null;
     #createEnemyInterval = null;
     #enemies = [];
+    #lives = null;
+    #score = null;
     #enemiesInterval = null;
     init(){
         this.#ship.init();
-        //this.#newGame();
+        this.#newGame();
     }
     #newGame(){
         this.#enemiesInterval = 30;
+        this.#lives = 3;
+        this.#score = 0;
         this.#createEnemyInterval = setInterval(() => this.#randomNewEnemy(), 1000);
         this.#checkPositionInterval = setInterval(() => this.#checkPosition(), 1);
     };
@@ -44,6 +50,7 @@ class Game{
             if (enemyPosition.top > window.innerHeight) {
                 enemy.explode();
                 enemiesArray.splice(enemyIndex, 1);
+                this.#updateLives();
             };
             this.#ship.missiles.forEach((missile, missileIndex, missileArray) => {
                 const missilePosition = {
@@ -64,6 +71,7 @@ class Game{
                         }
                         missile.remove();
                         missileArray.splice(missileIndex, 1);
+                        this.#updateScore();
                     };
                     
                 if (missilePosition.bottom < 0) {
@@ -73,6 +81,25 @@ class Game{
             });
         });
     };
+    #updateScore(){
+        this.#score++;
+        if (!(this.#score % 5)){
+            this.#enemiesInterval--;
+        }
+        this.#updateScoreText();
+    }
+    #updateLives(){
+        this.#lives--;
+        this.#updateLivesText();
+        this.#HTML_ELEMENTS.contener.classList.add('hit');
+        setTimeout( () => this.#HTML_ELEMENTS.contener.classList.remove('hit'), 100)
+    }
+    #updateScoreText(){
+        this.#HTML_ELEMENTS.score.textContent = `Score: ${this.#score}`
+    }
+    #updateLivesText(){
+        this.#HTML_ELEMENTS.lives.textContent = `Lives: ${this.#lives}`
+    }
 }
 window.onload = function(){
     const game = new Game();
