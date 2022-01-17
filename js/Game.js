@@ -24,7 +24,7 @@ class Game{
     };
     #newGame(){
         this.#HTML_ELEMENTS.modal.classList.add('hide');
-        this.#enemiesInterval = 10;
+        this.#enemiesInterval = 30;
         this.#lives = 3;
         this.#score = 0;
         this.#updateScoreText();
