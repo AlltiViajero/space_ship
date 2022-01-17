@@ -30,7 +30,7 @@ export class Enemy {
     #setNewPossition(){
         this.element.style.top = `${this.element.offsetTop + 1}px`
     }
-    //
+    //metoda czyszcząca interwał i usuwająca relement
     remove(){
         clearInterval(this.interval);
         this.element.remove();

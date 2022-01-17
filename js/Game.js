@@ -19,18 +19,20 @@ class Game{
         this.#createEnemyInterval = setInterval(() => this.#randomNewEnemy(), 1000);
         this.#checkPositionInterval = setInterval(() => this.#checkPosition(), 1);
     };
+//metoda losująca jaki wróg ma zostać wygenerowany
     #randomNewEnemy(){
       const randomNumber = Math.floor(Math.random() * 5) +1;
       randomNumber % 5 ? 
         this.#createNewEnemy(this.#HTML_ELEMENTS.contener, this.#enemiesInterval, 'enemy') : 
         this.#createNewEnemy(this.#HTML_ELEMENTS.contener, this.#enemiesInterval * 2, 'enemy--big', 3)
     }
-
+//metoda tworząca obiekty wrogów
     #createNewEnemy(...params){
         const enemy = new Enemy(...params);
         enemy.init();
         this.#enemies.push(enemy);
     }
+//sprawdzanie pozycji wroga i naboju statku
     #checkPosition(){
         this.#enemies.forEach((enemy, enemyIndex, enemiesArray) => {
             const enemyPosition = {
