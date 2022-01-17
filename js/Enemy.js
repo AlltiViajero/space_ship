@@ -1,8 +1,9 @@
 export class Enemy {
-    constructor(contaner, intervalTime, enemyClass, lives = 1){
+    constructor(contaner, intervalTime, enemyClass, explosionClass, lives = 1){
         this.contaner = contaner;
         this.element = document.createElement('div');
         this.enemyClass = enemyClass;
+        this.explosionClass = explosionClass;
         this.interval = null;
         this.intervalTime = intervalTime;
         this.lives = lives;
@@ -30,9 +31,19 @@ export class Enemy {
     #setNewPossition(){
         this.element.style.top = `${this.element.offsetTop + 1}px`
     }
-    //metoda czyszcząca interwał i usuwająca relement
-    remove(){
+    //metoda wykonania explizji
+    hit(){
+        this.lives--;
+        if (!this.lives){
+            this.explode();
+        };
+    };
+    //metoda nadania explozi obiektowi
+    explode(){
+        this.element.classList.remove(this.enemyClass);
+        this.element.classList.add(this.explosionClass)
         clearInterval(this.interval);
-        this.element.remove();
+        const animationTime = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--explosions-animation-time'), 10)
+        setTimeout( () => this.element.remove(), animationTime);
     }
 }
