@@ -19,7 +19,7 @@ class Game{
     #enemiesInterval = null;
     init(){
         this.#ship.init();
-        //this.#newGame();
+        this.#newGame();
         this.#HTML_ELEMENTS.button.addEventListener('click', () => this.#newGame());
     };
     #newGame(){
