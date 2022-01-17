@@ -10,12 +10,12 @@ export class Spaceship{
         this.contener = contener;
     }
     init(){
-        this.#setPosition();
+        this.setPosition();
         this.#eventListeners();
         this.#gameLoop();
     };
 //ustawienie statku na środku ekrany
-    #setPosition(){
+    setPosition(){
         this.element.style.bottom = '0px';
         this.element.style.left = `${window.innerWidth / 2 - this.#getPosition()}px`;
     };

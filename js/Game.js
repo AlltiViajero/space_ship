@@ -6,6 +6,9 @@ class Game{
         contener: document.querySelector('[data-contener]'),
         lives: document.querySelector('[data-lives]'),
         score: document.querySelector('[data-score]'),
+        modal: document.querySelector('[data-modal]'),
+        score_info: document.querySelector('[data-score-info]'),
+        button: document.querySelector('[data-button]'),
     }
     #ship = new Spaceship(this.#HTML_ELEMENTS.spaceship, this.#HTML_ELEMENTS.contener);
     #checkPositionInterval = null;
@@ -16,15 +19,29 @@ class Game{
     #enemiesInterval = null;
     init(){
         this.#ship.init();
-        this.#newGame();
-    }
+        //this.#newGame();
+        this.#HTML_ELEMENTS.button.addEventListener('click', () => this.#newGame());
+    };
     #newGame(){
-        this.#enemiesInterval = 30;
+        this.#HTML_ELEMENTS.modal.classList.add('hide');
+        this.#enemiesInterval = 10;
         this.#lives = 3;
         this.#score = 0;
+        this.#updateScoreText();
+        this.#updateLivesText();
+        this.#ship.element.style.left = '0px';
+        this.#ship.setPosition();
         this.#createEnemyInterval = setInterval(() => this.#randomNewEnemy(), 1000);
         this.#checkPositionInterval = setInterval(() => this.#checkPosition(), 1);
     };
+    #endGame(){
+        this.#HTML_ELEMENTS.modal.classList.remove('hide');
+        this.#HTML_ELEMENTS.score_info.textContent = `You loose! Your score is: ${this.#score} points`;
+        this.#enemies.forEach((enemy) => enemy.explode());
+        this.#enemies.length = 0;
+        clearInterval(this.#createEnemyInterval);
+        clearInterval(this.#checkPositionInterval);
+    }
 //metoda losująca jaki wróg ma zostać wygenerowany
     #randomNewEnemy(){
       const randomNumber = Math.floor(Math.random() * 5) +1;
@@ -92,7 +109,10 @@ class Game{
         this.#lives--;
         this.#updateLivesText();
         this.#HTML_ELEMENTS.contener.classList.add('hit');
-        setTimeout( () => this.#HTML_ELEMENTS.contener.classList.remove('hit'), 100)
+        setTimeout( () => this.#HTML_ELEMENTS.contener.classList.remove('hit'), 100);
+        if (!this.#lives){
+            this.#endGame();
+        }
     }
     #updateScoreText(){
         this.#HTML_ELEMENTS.score.textContent = `Score: ${this.#score}`
