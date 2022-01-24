@@ -10,7 +10,6 @@ export class Spaceship{
         btn_shot: document.querySelector('[data-btn-shot]'),
         btn_right: document.querySelector('[data-btn-right]'),
     }
-    //#clicked = false;
     constructor(element, contener){   //konstruktor który przekazuje element z uchytem do html w Game
         this.element = element;
         this.contener = contener;
@@ -55,21 +54,23 @@ export class Spaceship{
             };
         })
         this.#HTML_BTN.btn_shot.addEventListener("click", () => this.#shot());
-        this.#HTML_BTN.btn_left.addEventListener("mousedown", () => this.#leftArrow = true);
-        this.#HTML_BTN.btn_left.addEventListener("mouseup", () => this.#leftArrow = false);
-        this.#HTML_BTN.btn_right.addEventListener("mousedown", () => this.#rightAttow = true);
-        this.#HTML_BTN.btn_right.addEventListener("mouseup", () => this.#rightAttow = false);
+        this.#HTML_BTN.btn_left.addEventListener("click", () => this.#left());
+        this.#HTML_BTN.btn_right.addEventListener("click", () => this.#right());
+        // this.#HTML_BTN.btn_left.addEventListener("mousedown", () => this.#leftArrow = true);
+        // this.#HTML_BTN.btn_left.addEventListener("mouseup", () => this.#leftArrow = false);
+        // this.#HTML_BTN.btn_right.addEventListener("mousedown", () => this.#rightAttow = true);
+        // this.#HTML_BTN.btn_right.addEventListener("mouseup", () => this.#rightAttow = false);
     };
-    // #left(){
-    //     if (this.#leftArrow && this.#getPosition() > 12){   
-    //         this.element.style.left = `${parseInt(this.element.style.left, 10) - this.#modifier}px`;
-    //     }
-    // }
-    // #right(){
-    //     if (this.#getPosition() + 12 < window.innerWidth){
-    //         this.element.style.left = `${parseInt(this.element.style.left, 10) + this.#modifier}px`;
-    //     } 
-    // }
+    #left(){
+        if (this.#getPosition() > 12){   
+            this.element.style.left = `${parseInt(this.element.style.left, 10) - this.#modifier}px`;
+        }
+    }
+    #right(){
+        if (this.#getPosition() + 12 < window.innerWidth){
+            this.element.style.left = `${parseInt(this.element.style.left, 10) + this.#modifier}px`;
+        } 
+    }
 
 //metoda pomocnicza która zapewnia większą płynność
     #gameLoop = () => {
