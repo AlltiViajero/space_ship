@@ -31,7 +31,7 @@ class Game{
         this.#updateLivesText();
         this.#ship.element.style.left = '0px';
         this.#ship.setPosition();
-        this.#createEnemyInterval = setInterval(() => this.#randomNewEnemy(), 1000);
+        this.#createEnemyInterval = setInterval(() => this.#randomNewEnemy(), 2000);
         this.#checkPositionInterval = setInterval(() => this.#checkPosition(), 1);
     };
     #endGame(){
