@@ -126,15 +126,15 @@ body{
     color: wheat;
 }
 .btn_left{
-    height: 5vh;
-    width: 3vw;
+    height: 7vh;
+    width: 5vw;
     left: 10vw;
 }
 .btn_shot{
     left: 50%;
     transform: translate(-50%, -50%);
     width: 60vw;
-    height: 3vh;
+    height: 4vh;
     background-color: wheat;
     border: solid 1px rgb(58, 56, 56);
     border-radius: 10px;
@@ -142,8 +142,8 @@ body{
     font-weight: bold;
 }
 .btn_right{
-    height: 5vh;
-    width: 3vw;
+    height: 7vh;
+    width: 5vw;
     right: 10vw;
 }
 @keyframes move-8-units-X {

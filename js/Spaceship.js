@@ -21,7 +21,7 @@ export class Spaceship{
     };
 //ustawienie statku na środku ekrany
     setPosition(){
-        this.element.style.bottom = '50px';
+        this.element.style.bottom = '55px';
         this.element.style.left = `${window.innerWidth / 2 - this.#getPosition()}px`;
     };
 //pobranie pozycji statku
