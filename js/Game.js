@@ -8,7 +8,7 @@ class Game{
         score: document.querySelector('[data-score]'),
         modal: document.querySelector('[data-modal]'),
         score_info: document.querySelector('[data-score-info]'),
-        button: document.querySelector('[data-button]'),
+        button: document.querySelector('[data-button]'),    
     }
     #ship = new Spaceship(this.#HTML_ELEMENTS.spaceship, this.#HTML_ELEMENTS.contener);
     #checkPositionInterval = null;
@@ -68,11 +68,11 @@ class Game{
                 enemy.explode();
                 enemiesArray.splice(enemyIndex, 1);
                 this.#updateLives();
-            };
+            };              
             this.#ship.missiles.forEach((missile, missileIndex, missileArray) => {
                 const missilePosition = {
                     top: missile.element.offsetTop,
-                    right: enemy.element.offsetLeft + enemy.element.offsetWidth,
+                    right: missile.element.offsetLeft + missile.element.offsetWidth,
                     bottom: missile.element.offsetTop + missile.element.offsetHeight,
                     left: missile.element.offsetLeft,
                 }
@@ -89,13 +89,12 @@ class Game{
                         missile.remove();
                         missileArray.splice(missileIndex, 1);
                         this.#updateScore();
-                    };
-                    
+                    };   
                 if (missilePosition.bottom < 0) {
                     missile.remove();
                     missileArray.splice(missileIndex, 1);
                 };
-            });
+            }); 
         });
     };
     #updateScore(){
