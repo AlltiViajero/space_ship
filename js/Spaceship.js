@@ -5,6 +5,12 @@ export class Spaceship{
     #modifier = 10;         //zmienna przechowująca o ile ma się przesówać px statek
     #leftArrow = false;     //zmienna sprawdzająca czy jest wciśnięta lewa strzałka
     #rightAttow = false;    //zmienna sprawdzająca czy jest wciśnięta prawa strzałka
+    #HTML_BTN = {
+        btn_left: document.querySelector('[data-btn-left]'),
+        btn_shot: document.querySelector('[data-btn-shot]'),
+        btn_right: document.querySelector('[data-btn-right]'),
+    }
+    //#clicked = false;
     constructor(element, contener){   //konstruktor który przekazuje element z uchytem do html w Game
         this.element = element;
         this.contener = contener;
@@ -16,7 +22,7 @@ export class Spaceship{
     };
 //ustawienie statku na środku ekrany
     setPosition(){
-        this.element.style.bottom = '0px';
+        this.element.style.bottom = '50px';
         this.element.style.left = `${window.innerWidth / 2 - this.#getPosition()}px`;
     };
 //pobranie pozycji statku
@@ -47,8 +53,24 @@ export class Spaceship{
                     this.#rightAttow = false;
                 break;
             };
-        });
+        })
+        this.#HTML_BTN.btn_shot.addEventListener("click", () => this.#shot());
+        this.#HTML_BTN.btn_left.addEventListener("mousedown", () => this.#leftArrow = true);
+        this.#HTML_BTN.btn_left.addEventListener("mouseup", () => this.#leftArrow = false);
+        this.#HTML_BTN.btn_right.addEventListener("mousedown", () => this.#rightAttow = true);
+        this.#HTML_BTN.btn_right.addEventListener("mouseup", () => this.#rightAttow = false);
     };
+    // #left(){
+    //     if (this.#leftArrow && this.#getPosition() > 12){   
+    //         this.element.style.left = `${parseInt(this.element.style.left, 10) - this.#modifier}px`;
+    //     }
+    // }
+    // #right(){
+    //     if (this.#getPosition() + 12 < window.innerWidth){
+    //         this.element.style.left = `${parseInt(this.element.style.left, 10) + this.#modifier}px`;
+    //     } 
+    // }
+
 //metoda pomocnicza która zapewnia większą płynność
     #gameLoop = () => {
         this.#whatKey();
