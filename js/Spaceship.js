@@ -53,7 +53,7 @@ export class Spaceship{
                 break;
             };
         })
-        // this.#HTML_BTN.btn_shot.addEventListener("click", () => this.#shot());
+        this.#HTML_BTN.btn_shot.addEventListener("click", () => this.#shot());
         // this.#HTML_BTN.btn_left.addEventListener("click", () => this.#left());
         // this.#HTML_BTN.btn_right.addEventListener("click", () => this.#right());
         this.#HTML_BTN.btn_left.addEventListener("touchstart", () => this.#leftArrow = true);
