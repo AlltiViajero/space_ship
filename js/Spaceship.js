@@ -2,6 +2,7 @@ import { Missile } from "./Missile.js";
 
 export class Spaceship{
     missiles = []           //tablica z nabojami
+    missileLimit = 15;      //limit nabojów wystrzelonych za jednym razem
     #modifier = 10;         //zmienna przechowująca o ile ma się przesówać px statek
     #leftArrow = false;     //zmienna sprawdzająca czy jest wciśnięta lewa strzałka
     #rightAttow = false;    //zmienna sprawdzająca czy jest wciśnięta prawa strzałka
@@ -87,9 +88,18 @@ export class Spaceship{
         }
     };
 //metoda strzelania
+    // #shot(){
+    //     const missile = new Missile(this.#getPosition(), this.element.offsetTop, this.contener);
+    //     missile.init();
+    //     this.missiles.push(missile);
+    //     console.log(this.missiles.length);
+    // }
     #shot(){
-        const missile = new Missile(this.#getPosition(), this.element.offsetTop, this.contener);
-        missile.init();
-        this.missiles.push(missile);
+        if (this.missiles.length < this.missileLimit){
+            const missile = new Missile(this.#getPosition(), this.element.offsetTop, this.contener);
+            missile.init();
+            this.missiles.push(missile);
+        }
     }
+
 };

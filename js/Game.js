@@ -1,4 +1,4 @@
-import { Spaceship } from "./Spaceship.js";
+import { Spaceship} from "./Spaceship.js";
 import { Enemy } from "./Enemy.js";
 class Game{
     #HTML_ELEMENTS = {
@@ -118,7 +118,7 @@ class Game{
     }
     #updateLivesText(){
         this.#HTML_ELEMENTS.lives.textContent = `Lives: ${this.#lives}`
-    }
+    }  
 }
 window.onload = function(){
     const game = new Game();
