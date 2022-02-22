@@ -24,14 +24,14 @@ class Game{
     };
     #newGame(){
         this.#HTML_ELEMENTS.modal.classList.add('hide');
-        this.#enemiesInterval = 30;
+        this.#enemiesInterval = 15;
         this.#lives = 3;
         this.#score = 0;
         this.#updateScoreText();
         this.#updateLivesText();
         this.#ship.element.style.left = '0px';
         this.#ship.setPosition();
-        this.#createEnemyInterval = setInterval(() => this.#randomNewEnemy(), 1000);//co ile ma się generować nowy statek
+        this.#createEnemyInterval = setInterval(() => this.#randomNewEnemy(), 1500);//co ile ma się generować nowy statek
         this.#checkPositionInterval = setInterval(() => this.#checkPosition(), 1);
     };
     #endGame(){
