@@ -2,7 +2,7 @@ import { Missile } from "./Missile.js";
 
 export class Spaceship{
     missiles = []           //tablica z nabojami
-    missileLimit = 15;      //limit nabojów wystrzelonych za jednym razem
+    missileLimit = 5;       //limit nabojów wystrzelonych za jednym razem
     #modifier = 10;         //zmienna przechowująca o ile ma się przesówać px statek
     #leftArrow = false;     //zmienna sprawdzająca czy jest wciśnięta lewa strzałka
     #rightAttow = false;    //zmienna sprawdzająca czy jest wciśnięta prawa strzałka
